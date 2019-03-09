@@ -5,7 +5,15 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
-  name: "arena"
+  name: "arena",
+  methods: {
+    ...mapActions("auth", ["checkLogin"])
+  },
+  created() {
+    this.checkLogin();
+  }
 };
 </script>

@@ -1,7 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import { auth } from "./firebase";
-import store from "./store";
+import { auth } from "@/firebase";
 
 Vue.use(VueRouter);
 
@@ -10,14 +9,20 @@ const router = new VueRouter({
 
   routes: [
     {
-      path: "/",
-      component: () => import("@/pages/Home"),
-      meta: { auth: true }
-    },
-    {
-      path: "/login",
-      component: () => import("@/pages/Login"),
-      meta: { auth: false }
+      path: "",
+      component: () => import("@/layout/Main"),
+      children: [
+        {
+          path: "/",
+          component: () => import("@/pages/Home"),
+          meta: { auth: true }
+        },
+        {
+          path: "/login",
+          component: () => import("@/pages/Login"),
+          meta: { auth: false }
+        }
+      ]
     }
   ]
 });
